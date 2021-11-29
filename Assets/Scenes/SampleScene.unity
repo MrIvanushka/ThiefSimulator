@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 62172922}
   - component: {fileID: 62172921}
   - component: {fileID: 62172920}
+  - component: {fileID: 62172924}
   m_Layer: 0
   m_Name: Signalization plane
   m_TagString: Untagged
@@ -153,7 +154,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 3.01, y: 1.6257, z: 2.038}
   m_LocalScale: {x: 0.21162401, y: 1, z: 0.111663036}
-  m_Children: []
+  m_Children:
+  - {fileID: 144413426}
   m_Father: {fileID: 4390483024833985}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -166,7 +168,7 @@ MeshCollider:
   m_GameObject: {fileID: 62172918}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -183,46 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710a239438ef08c4a8b76f6c192fb0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onBreakup:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5512734036314448210}
-        m_TargetAssemblyTypeName: AlarmLight, Assembly-CSharp
-        m_MethodName: StartBlinking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 334629222}
-        m_TargetAssemblyTypeName: AlarmLight, Assembly-CSharp
-        m_MethodName: StartBlinking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1473193323}
-        m_TargetAssemblyTypeName: AlarmLight, Assembly-CSharp
-        m_MethodName: StartBlinking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _thiefTag: Player
+  _alarmLights:
+  - {fileID: 5512734036314448210}
+  - {fileID: 334629222}
+  - {fileID: 1473193323}
+  _pointInside: {fileID: 144413426}
 --- !u!23 &62172922
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -272,6 +239,49 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62172918}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &62172924
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62172918}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 2.2204466e-16, z: 10.000001}
+  m_Center: {x: -0.0000019073486, y: 0, z: 0.000030517578}
+--- !u!1 &144413425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 144413426}
+  m_Layer: 0
+  m_Name: PointInside
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &144413426
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144413425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.462, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 62172919}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &334629221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -460,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd4404f467623a4c98307f917fb7808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 1
+  _axes: 1
   _sensitivity: 2
   _minRotationValue: -360
   _maxRotationValue: 360
@@ -685,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd4404f467623a4c98307f917fb7808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 2
+  _axes: 2
   _sensitivity: 2
   _minRotationValue: -60
   _maxRotationValue: 60
@@ -776,7 +786,6 @@ GameObject:
   - component: {fileID: 1346577919}
   - component: {fileID: 1346577923}
   - component: {fileID: 1346577922}
-  - component: {fileID: 1346577921}
   - component: {fileID: 1346577920}
   m_Layer: 0
   m_Name: Blocking plane
@@ -813,58 +822,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1346577921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346577918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 710a239438ef08c4a8b76f6c192fb0b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onBreakup:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5512734036314448210}
-        m_TargetAssemblyTypeName: AlarmLight, Assembly-CSharp
-        m_MethodName: StartBlinking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 334629222}
-        m_TargetAssemblyTypeName: AlarmLight, Assembly-CSharp
-        m_MethodName: StartBlinking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1473193323}
-        m_TargetAssemblyTypeName: AlarmLight, Assembly-CSharp
-        m_MethodName: StartBlinking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _thiefTag: Player
 --- !u!23 &1346577922
 MeshRenderer:
   m_ObjectHideFlags: 0

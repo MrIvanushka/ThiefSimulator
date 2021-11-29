@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -9,7 +10,7 @@ public class AlarmLight : MonoBehaviour
     [SerializeField] private float _maxLightIntensity;
     [SerializeField] private float _blinkDuration;
 
-    private bool _isWorking = false;
+    private Stack<Tween> _allTweens = new Stack<Tween>();
 
     private void Start()
     {
@@ -18,11 +19,21 @@ public class AlarmLight : MonoBehaviour
 
     public void StartBlinking()
     {
-        if (_isWorking == false)
+        if (_allTweens.Count == 0)
         {
-            _audioPlayer.DOFade(1, _blinkDuration).SetLoops(-1, LoopType.Yoyo);
-            _redLight.DOIntensity(_maxLightIntensity, _blinkDuration).SetLoops(-1, LoopType.Yoyo);
-            _isWorking = true;
+            _allTweens.Push(_audioPlayer.DOFade(1, _blinkDuration).SetLoops(-1, LoopType.Yoyo));
+            _allTweens.Push(_redLight.DOIntensity(_maxLightIntensity, _blinkDuration).SetLoops(-1, LoopType.Yoyo));
         }
+    }
+
+    public void StopBlinking()
+    {
+        while(_allTweens.Count > 0)
+        {
+            Tween tween = _allTweens.Pop();
+            tween.Kill();
+        }
+        _redLight.DOIntensity(0, _blinkDuration);
+        _audioPlayer.DOFade(0, _blinkDuration);
     }
 }

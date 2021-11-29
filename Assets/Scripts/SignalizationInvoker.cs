@@ -5,12 +5,37 @@ using UnityEngine.Events;
 
 public class SignalizationInvoker : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _onBreakup;
-    [SerializeField] private string _thiefTag;
+    [SerializeField] private AlarmLight[] _alarmLights;
+    [SerializeField] private Transform _pointInside;
 
-    private void OnTriggerEnter(Collider other)
+    private Vector3 _insideVector;
+
+    private void Start()
     {
-        if (other.tag == _thiefTag)
-            _onBreakup?.Invoke();
+        _insideVector = _pointInside.position - transform.position;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+        {
+            if (SomebodyEntered(other.transform.position) == true)
+                foreach (var light in _alarmLights)
+                {
+                    light.StartBlinking();
+                    Debug.Log("I was here");
+                }
+            else
+                foreach (var light in _alarmLights)
+                {
+                    light.StopBlinking();
+                    Debug.Log("I was there");
+                }
+        }
+    }
+
+    private bool SomebodyEntered(Vector3 thiefPosition)
+    {
+        return Vector3.Dot(thiefPosition - transform.position, _insideVector) > 0;
     }
 }

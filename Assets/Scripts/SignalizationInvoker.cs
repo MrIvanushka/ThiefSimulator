@@ -21,16 +21,10 @@ public class SignalizationInvoker : MonoBehaviour
         {
             if (SomebodyEntered(other.transform.position) == true)
                 foreach (var light in _alarmLights)
-                {
                     light.StartBlinking();
-                    Debug.Log("I was here");
-                }
             else
                 foreach (var light in _alarmLights)
-                {
                     light.StopBlinking();
-                    Debug.Log("I was there");
-                }
         }
     }
 

@@ -9,20 +9,20 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _controller;
     private float _gravity = 10f;
 
-    void Start()
+    private void Start()
     {
         _controller = GetComponent<CharacterController>();
     }
 
     
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"),  -_gravity,Input.GetAxis("Vertical"));
         Move(direction);
 
     }
 
-    public void Move(Vector3 direction)
+    private  void Move(Vector3 direction)
     {
         direction = transform.TransformDirection(direction);
         direction *= _speed;
